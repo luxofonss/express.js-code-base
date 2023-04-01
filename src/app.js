@@ -5,7 +5,10 @@ const helmet = require("helmet");
 const { checkOverload } = require("./helpers/check_connect");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+const passport = require("passport");
+const cookieSession = require("cookie-session");
 const app = express();
+require("dotenv").config();
 
 // init middleware
 app.use(morgan("dev"));
@@ -24,6 +27,12 @@ app.use(
   })
 );
 app.use(helmet());
+app.use(
+  cookieSession({
+    maxAge: 24 * 60 * 60 * 1000,
+    keys: [process.env.SESSION_SECRET],
+  })
+);
 //cors
 
 const whitelist = ["http://localhost:3003", "http://127.0.0.1:3003"]; //white list consumers
@@ -65,10 +74,20 @@ app.use(cookieParser());
 // init database
 require("./database/init.mongodb");
 
+// passport.js
+require("./auth/passport");
+require("./auth/passport.GoogleSSO");
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 // check if database overloaded ->
 // checkOverload();
 
 // init routes
+// app.use("/", (req, res) => {
+//   res.send("Hello");
+// });
 app.use("/", require("./routes"));
 
 // handle error

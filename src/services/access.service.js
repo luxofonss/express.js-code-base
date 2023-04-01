@@ -100,6 +100,13 @@ class AccessService {
     if (!foundShop)
       throw new AuthFailureError("Error: Email or password is not correct");
 
+    console.log(foundShop);
+    console.log("foundShop.oauthId", foundShop.oauthId);
+    if (foundShop.oauthId) {
+      throw new AuthFailureError(
+        "This email has been used in other login methods"
+      );
+    }
     // compare password
     const match = bcrypt.compare(password, foundShop.password);
     if (!match) throw new AuthFailureError("Error: Unauthorized!");

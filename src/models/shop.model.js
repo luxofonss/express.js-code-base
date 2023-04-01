@@ -19,7 +19,7 @@ const shopSchema = new Schema(
     },
     password: {
       type: String,
-      required: true,
+      required: false,
     },
     verify: {
       type: Boolean,
@@ -28,6 +28,16 @@ const shopSchema = new Schema(
     roles: {
       type: Array,
       default: [],
+    },
+    oauthStrategy: {
+      type: String,
+      enum: ["Google", "Local", "Facebook"],
+    },
+    oauthId: {
+      type: String,
+    },
+    avatar: {
+      type: String,
     },
   },
   {

@@ -4,7 +4,8 @@
   "description": "express.js code base ",
   "main": "server.js",
   "scripts": {
-    "start": "node --watch server.js",
+    "start": "node server.js",
+    "dev": "node --watch server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -16,6 +17,7 @@
     "bcrypt": "^5.1.0",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.6",
+    "cookie-session": "^2.0.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
@@ -24,7 +26,10 @@
     "jsonwebtoken": "^9.0.0",
     "lodash": "^4.17.21",
     "mongodb": "^5.1.0",
-    "mongoose": "^7.0.3"
+    "mongoose": "^7.0.3",
+    "passport": "^0.5.3",
+    "passport-google-oauth20": "^2.0.0",
+    "passport-jwt": "^4.0.1"
   },
   "devDependencies": {
     "morgan": "^1.10.0"
